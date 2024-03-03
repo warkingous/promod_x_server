@@ -106,17 +106,12 @@ findTeamName( teamId, team )
     {
         player = level.players[i];
 
-        if ( player.pers["teamId"] == teamId )
+        if ( isDefined( player.pers["teamId"]) && player.pers["teamId"] == teamId )
         {
             return player.pers["teamName"];
-            //iprintln(player.pers["teamName"]);
-            //wait 4;
-            //game["alliesTeamName"] = player.pers["teamName"];
-            //return;
         }
     }
 
-    //game["alliesTeamName"] = "Not available";
     return "Not available";
 }
 
@@ -126,7 +121,7 @@ findTeamTag( teamId )
     {
         player = level.players[i];
 
-        if ( player.pers["teamId"] == teamId )
+        if ( isDefined( player.pers["teamId"]) && player.pers["teamId"] == teamId )
         {
             return player.pers["teamTag"];
             //game[team+"TeamName"] = player.pers["teamName"];
@@ -298,52 +293,6 @@ processKillData(attacker, victim, attacker_data, victim_data, kill_data)
         kill_data   
         , ::dataCallback
     );
-}
-
-findTeamNameXX(teamType)
-{
-    teamIdCheck = 0;
-    teamTempNames = [];
-    teamSize = 0;
-    majorityTeamName = "none";
-
-    for (i = 0; i < level.players.size; i++)
-    {
-        // Check if the player has a valid teamId
-        if (isDefined(level.players[i].pers["teamName"]) && level.players[i].pers["team"] == teamType)
-        {
-            teamTempNames[teamSize] = level.players[i].pers["teamName"];
-            teamSize++;
-        }
-    }
-
-    // Handle 1v1 scenario
-    if (teamSize == 1)
-    {
-        return teamTempNames[0]; // Return the teamName for the solo player
-    }
-
-    // Check if the team has players with the same teamName
-    if (teamSize > 1)
-    {
-        bubbleSort(teamTempNames);
-        majorityTeamName = findMajority(teamTempNames);
-
-        if (countOccurrences(teamTempNames, majorityTeamName) >= teamSize / 2)
-        {
-            teamIdCheck = 1;
-        }
-    }
-
-    // Return the majority teamName for the specified team or "none" if no majority teamName found
-    if (teamIdCheck == 1)
-    {
-        return majorityTeamName;
-    }
-    else
-    {
-        return "none";
-    }
 }
 
 findTeamId( team )
