@@ -41,17 +41,20 @@ clipReport( player, round, clipTime )
 	else 
 		timeInRound = 0;
 
-    httppostjson("https://cod4mm.eu/api/promod/stats/match/clip", 
-        level.fps_match_id + ";" + 
-        level.script + ";" +
-        player.pers["username"] + ";" +
-        player getSteamId64() + ";" +
-        round + ";" + 
-        timeInRound + ";" +
-        clipTime + ";" +
-        player.origin
-        , ::dataCallback
-	);        
+    if (timeInRound != 0)
+    {
+        httppostjson("https://cod4mm.eu/api/promod/stats/match/clip", 
+            level.fps_match_id + ";" + 
+            level.script + ";" +
+            player.pers["username"] + ";" +
+            player getSteamId64() + ";" +
+            round + ";" + 
+            timeInRound + ";" +
+            clipTime + ";" +
+            player.origin
+            , ::dataCallback
+        );
+    }        
 }
 
 bombReport( player, label, type, round )
