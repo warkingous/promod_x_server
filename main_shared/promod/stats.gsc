@@ -419,6 +419,10 @@ gameStartedCallback( handle )
 
 mapFinished( )
 {
+
+    // Wait for player stats to save
+    wait 10;
+
     match_id = level.fps_match_id;
     map_name = level.script;
 
