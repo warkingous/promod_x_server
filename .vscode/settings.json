@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.gsx": "gsc",
+        "ostream": "cpp"
+    }
+}
