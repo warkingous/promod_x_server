@@ -98,6 +98,7 @@ int upload_compressed_file(const std::string& compressed_filename, const std::st
     struct curl_httppost* lastptr = NULL;
     curl_formadd(&formpost, &lastptr, CURLFORM_COPYNAME, "file", CURLFORM_FILE, compressed_filename.c_str(), CURLFORM_END);
     curl_easy_setopt(curl, CURLOPT_HTTPPOST, formpost);
+    curl_easy_setopt(curl, CURLOPT_MAX_SEND_SPEED_LARGE, (curl_off_t)12500000);
 
     // Perform the upload
     res = curl_easy_perform(curl);
