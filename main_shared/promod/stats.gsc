@@ -417,16 +417,15 @@ gameStartedCallback( handle )
     jsonreleaseobject( handle );
 }
 
-mapFinished( )
+mapFinished( winnerTeamId )
 {
-
     // Wait for player stats to save
     wait 3;
 
     match_id = level.fps_match_id;
     map_name = level.script;
 
-    string = match_id + ";" + map_name;
+    string = match_id + ";" + map_name + ";" + winnerTeamId;
 
     httppostjson("https://cod4mm.eu/api/promod/stats/match/finish", 
         string
